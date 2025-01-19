@@ -1,12 +1,13 @@
-from django.db import models
 from blogicum.models import PublishedModel
 from django.contrib.auth import get_user_model
+from django.db import models
 
+CHAR_LENGTH = 256
 User = get_user_model()
 
 
 class Category(PublishedModel):
-    title = models.CharField(max_length=256, verbose_name='Заголовок')
+    title = models.CharField(max_length=CHAR_LENGTH, verbose_name='Заголовок')
     description = models.TextField(verbose_name='Описание')
     slug = models.SlugField(
         unique=True, verbose_name='Идентификатор',
@@ -19,7 +20,8 @@ class Category(PublishedModel):
 
 
 class Location(PublishedModel):
-    name = models.CharField(max_length=256, verbose_name='Название места')
+    name = models.CharField(max_length=CHAR_LENGTH,
+                            verbose_name='Название места')
 
     class Meta:
         verbose_name = 'местоположение'
@@ -27,7 +29,7 @@ class Location(PublishedModel):
 
 
 class Post(PublishedModel):
-    title = models.CharField(max_length=256, verbose_name='Заголовок')
+    title = models.CharField(max_length=CHAR_LENGTH, verbose_name='Заголовок')
     text = models.TextField(verbose_name='Текст')
     pub_date = models.DateTimeField(
         verbose_name='Дата и время публикации',
@@ -48,6 +50,7 @@ class Post(PublishedModel):
         Category,
         on_delete=models.SET_NULL,
         null=True,
+        related_name='posts',
         verbose_name='Категория'
     )
 
