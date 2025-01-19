@@ -4,11 +4,10 @@ from django.shortcuts import render, get_object_or_404
 
 
 def posts():
-    return Post.objects.filter(
-    is_published=True,
-    pub_date__lte=Now(),
-    category__is_published=True,
-    ).select_related('category')
+    return Post.objects.filter(is_published=True,
+                               pub_date__lte=Now(),
+                               category__is_published=True,
+                               ).select_related('category')
 
 
 def index(request):
