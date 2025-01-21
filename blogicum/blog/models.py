@@ -1,8 +1,9 @@
-from blogicum.models import PublishedModel
 from django.contrib.auth import get_user_model
 from django.db import models
 
-CHAR_LENGTH = 256
+from blog.constants import CHAR_LENGTH
+from blogicum.models import PublishedModel
+
 User = get_user_model()
 
 
